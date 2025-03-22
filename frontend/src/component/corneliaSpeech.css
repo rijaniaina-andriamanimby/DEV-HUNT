@@ -1,111 +1,173 @@
 .microphone-container .circle {
-    position: absolute;
-    border-radius: 50%;
-    background-color: red; /* Remplace le rouge par bleu pour le style de l'animation */
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgb(105, 180, 240); /* Remplace le rouge par bleu pour le style de l'animation */
+  opacity: 0.4;
+  animation: pulse 1.5s infinite ease-in-out;
+  z-index: 0; /* Place les cercles sous l'icône du micro */
+}
+
+.circle1 {
+  width: 300px;
+  height: 300px;
+  animation-delay: 0s;
+  z-index: 1; /* Premier cercle, donc il est plus en avant que les autres cercles */
+  opacity: 0.7; /* Plus visible */
+}
+
+.circle2 {
+  width: 340px;
+  height: 340px;
+  animation-delay: 0.5s;
+  z-index: 0;
+}
+
+.circle3 {
+  width: 380px;
+  height: 380px;
+  animation-delay: 1s;
+  z-index: 0;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
     opacity: 0.4;
-    animation: pulse 1.5s infinite ease-in-out;
-    z-index: 0; /* Place les cercles sous l'icône du micro */
   }
-  
-  .circle1 {
-    width: 300px;
-    height: 300px;
-    animation-delay: 0s;
-    z-index: 1; /* Premier cercle, donc il est plus en avant que les autres cercles */
-    opacity: 0.7; /* Plus visible */
+  50% {
+    transform: scale(1.2);
+    opacity: 0.2;
   }
-  
-  .circle2 {
-    width: 340px;
-    height: 340px;
-    animation-delay: 0.5s;
-    z-index: 0;
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
   }
-  
-  .circle3 {
-    width: 380px;
-    height: 380px;
-    animation-delay: 1s;
-    z-index: 0;
-  }
-  
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 0.4;
-    }
-    50% {
-      transform: scale(1.2);
-      opacity: 0.2;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0.4;
-    }
-  }
-  
-  .recording .circle {
-    animation-play-state: running;
-  }
-  
-  /* CorneliaSpeech.css */
+}
+
+.recording .circle {
+  animation-play-state: running;
+}
+
+/* CorneliaSpeech.css */
 
 .wave-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .wave-bar {
-    width: 5px;
-    height: 60px;
-    background-color: black;
-    margin: 0 3px;
-    border-radius: 3px;
-    animation: waveAnimation 1.2s infinite ease-in-out;
-  }
-  
-  .wave-bar:nth-child(2) {
-    animation-delay: -4s;
-  }
-  
-  .wave-bar:nth-child(3) {
-    animation-delay: -1.0s;
-  }
-  
-  .wave-bar:nth-child(4) {
-    animation-delay: -0.9s;
-  }
-  
-  .wave-bar:nth-child(5) {
-    animation-delay: -0.8s;
-  }
+  display: flex;
+  align-items: center;
+}
 
-  .wave-bar:nth-child(6) {
-    animation-delay: -0.5s;
+.wave-bar {
+  width: 5px;
+  height: 60px;
+  background-color: black;
+  margin: 0 3px;
+  border-radius: 3px;
+  animation: waveAnimation 1.2s infinite ease-in-out;
+}
+
+.wave-bar:nth-child(2) {
+  animation-delay: -4s;
+}
+
+.wave-bar:nth-child(3) {
+  animation-delay: -1.0s;
+}
+
+.wave-bar:nth-child(4) {
+  animation-delay: -0.9s;
+}
+
+.wave-bar:nth-child(5) {
+  animation-delay: -0.8s;
+}
+
+.wave-bar:nth-child(6) {
+  animation-delay: -0.5s;
+}
+
+.wave-bar:nth-child(7) {
+  animation-delay: -0.4s;
+}
+
+.wave-bar:nth-child(8) {
+  animation-delay: -0.3s;
+}
+
+.wave-bar:nth-child(9) {
+  animation-delay: -0.1s;
+}
+
+.wave-bar:nth-child(10) {
+  animation-delay: -0.8s;
+}
+
+.wave-bar:nth-child(11) {
+  animation-delay: -0.5s;
+}
+
+.wave-bar:nth-child(12) {
+  animation-delay: -0.4s;
+}
+
+.wave-bar:nth-child(13) {
+  animation-delay: -0.3s;
+}
+
+.wave-bar:nth-child(14) {
+  animation-delay: -0.1s;
+}
+
+.wave-bar:nth-child(15) {
+  animation-delay: -0.8s;
+}
+
+.wave-bar:nth-child(16) {
+  animation-delay: -0.5s;
+}
+
+.wave-bar:nth-child(17) {
+  animation-delay: -0.4s;
+}
+
+.wave-bar:nth-child(18) {
+  animation-delay: -0.3s;
+}
+
+.wave-bar:nth-child(19) {
+  animation-delay: -0.1s;
+}
+
+@keyframes waveAnimation {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
   }
-  
-  .wave-bar:nth-child(7) {
-    animation-delay: -0.4s;
+  20% {
+    transform: scaleY(1.0);
   }
-  
-  .wave-bar:nth-child(8) {
-    animation-delay: -0.3s;
+}
+
+/* ... le reste de votre CSS ... */
+.custom-background {
+  background-color: #f9f5f2; /* Choisis ta couleur */
+}
+
+/* Ajout d'une animation pour le logo */
+.logo-animation {
+  animation: fadeInRotate 2s ease-in-out;
+}
+
+@keyframes fadeInRotate {
+  0% {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
   }
-  
-  .wave-bar:nth-child(9) {
-    animation-delay: -0.1s;
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
   }
-  
-  @keyframes waveAnimation {
-    0%, 40%, 100% {
-      transform: scaleY(0.4);
-    }
-    20% {
-      transform: scaleY(1.0);
-    }
-  }
-  
-  /* ... le reste de votre CSS ... */
-  .custom-background {
-    background-color: #f9f5f2; /* Choisis ta couleur */
-  }
+}
+
+/* Animation hover pour le bouton Play/Pause */
+.play-pause-button:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Table, Button, Form } from "react-bootstrap";
-import { Trash, Pencil, PlusCircle } from "react-bootstrap-icons";
+import { BsTrash, BsPencil, BsPlusCircle } from "react-icons/bs"; // ✅ Import correct
 import "./css/AdminAudioPage.css";
 
 export default function AdminAudioPage() {
@@ -26,7 +26,6 @@ export default function AdminAudioPage() {
     setShowModal(true);
   };
 
-
   // Modifer audio
   const handleUpdateAudio = () => {
     setAudioFiles(audioFiles.map(audio => (audio.id === editAudio.id ? newAudio : audio)));
@@ -34,7 +33,6 @@ export default function AdminAudioPage() {
     setEditAudio(null);
     setNewAudio({ name: "", author: "", level: "Débutant", type: "MP3", file: null });
   };
-
 
   // Suppression audio
   const handleDeleteAudio = (id) => {
@@ -49,7 +47,7 @@ export default function AdminAudioPage() {
         onClick={() => setShowModal(true)}
         className="mb-4"
       >
-        <PlusCircle size={20} /> Ajouter un Fichier Audio
+        <BsPlusCircle size={20} /> Ajouter un Fichier Audio
       </Button>
       <Table striped bordered hover className="custom-table">
         <thead className="bg-primary text-white">
@@ -75,14 +73,14 @@ export default function AdminAudioPage() {
                   className="me-2"
                   onClick={() => handleEditAudio(audio)}
                 >
-                  <Pencil />
+                  <BsPencil />
                 </Button>
                 <Button
                   variant="outline-danger"
                   size="sm"
                   onClick={() => handleDeleteAudio(audio.id)}
                 >
-                  <Trash />
+                  <BsTrash />
                 </Button>
               </td>
             </tr>
