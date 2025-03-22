@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reconnaissance Vocale</title>
+</head>
+<body>
+    <h1>Reconnaissance Vocale</h1>
+    <p id="transcription">Parlez maintenant...</p>
+    <button onclick="startRecognition()">Démarrer la reconnaissance</button>
+
+    <script>
+        let recognition;
+        let isResponding = false;
+
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+
+            recognition.lang = 'fr-FR';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onresult = function(event) {
+                let transcript = event.results[0][0].transcript.toLowerCase().trim();
+                console.log("Vous avez dit:", transcript);
+
+                document.getElementById('transcription').textContent = transcript;
+
+                if (!isResponding) {
+                    isResponding = true;
+                    respondToSpeech(transcript);
+                }
+            };
+
+            function respondToSpeech(transcript) {
+                if (!window.speechSynthesis) {
+                    console.error("Synthèse vocale non supportée.");
+                    return;
+                }
+
+                speechSynthesis.cancel(); // Arrêter toute voix en cours
+
+                let responseText = "Désolé, je n'ai pas compris.";
+                if (transcript.includes("bonjour")) {
+                    responseText = "Bonjour ! Comment puis-je vous aider ?";
+                } else if (transcript.includes("comment ça va")) {
+                    responseText = "Je vais bien, merci ! Et vous ?";
+                } else if (transcript.includes("quelle heure est-il")) {
+                    let now = new Date();
+                    responseText = `Il est ${now.getHours()} heures et ${now.getMinutes()} minutes.`;
+                } else if (transcript.includes("aide")) {
+                    responseText = "Que voulez-vous savoir ?";
+                }
+
+                console.log("Réponse:", responseText);
+
+                const utterance = new SpeechSynthesisUtterance(responseText);
+                utterance.lang = "fr-FR";
+                utterance.volume = 1;
+                utterance.rate = 1;
+                utterance.pitch = 1;
+
+                speechSynthesis.speak(utterance);
+
+                utterance.onend = function () {
+                    isResponding = false;
+                    recognition.start();
+                };
+            }
+
+            recognition.onerror = function(event) {
+                console.error("Erreur de reconnaissance vocale:", event.error);
+            };
+
+        } else {
+            alert("Votre navigateur ne prend pas en charge la reconnaissance vocale.");
+        }
+
+        function startRecognition() {
+            if (recognition) {
+                recognition.start();
+            }
+        }
+    </script>
+</body>
+</html>
