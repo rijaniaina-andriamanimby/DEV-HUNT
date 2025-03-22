@@ -69,9 +69,9 @@ export default function CorneliaSpeech() {
     <div className="d-flex align-items-center justify-content-center vh-100 vw-100 custom-background">
       <div className="position-absolute top-0 start-0 m-4 text-start">
         <img 
-          src="/img/finalcor.png"  
+          src="/img/finalco.JPG"  
           alt="Cornelia Speech Logo" 
-          style={{ width: "250px", borderRadius: "50%" }} 
+          style={{ width: "350px", borderRadius: "" }} 
         />
       </div>
 
