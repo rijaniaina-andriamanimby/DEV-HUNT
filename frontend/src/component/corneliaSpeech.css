@@ -1,7 +1,7 @@
 .microphone-container .circle {
     position: absolute;
     border-radius: 50%;
-    background-color: red; /* Remplace le rouge par bleu pour le style de l'animation */
+    background-color: rgb(105, 180, 240); /* Remplace le rouge par bleu pour le style de l'animation */
     opacity: 0.4;
     animation: pulse 1.5s infinite ease-in-out;
     z-index: 0; /* Place les cercles sous l'icône du micro */
@@ -93,6 +93,46 @@
   }
   
   .wave-bar:nth-child(9) {
+    animation-delay: -0.1s;
+  }
+
+  .wave-bar:nth-child(10) {
+    animation-delay: -0.8s;
+  }
+
+  .wave-bar:nth-child(11) {
+    animation-delay: -0.5s;
+  }
+  
+  .wave-bar:nth-child(12) {
+    animation-delay: -0.4s;
+  }
+  
+  .wave-bar:nth-child(13) {
+    animation-delay: -0.3s;
+  }
+  
+  .wave-bar:nth-child(14) {
+    animation-delay: -0.1s;
+  }
+
+  .wave-bar:nth-child(15) {
+    animation-delay: -0.8s;
+  }
+
+  .wave-bar:nth-child(16) {
+    animation-delay: -0.5s;
+  }
+  
+  .wave-bar:nth-child(17) {
+    animation-delay: -0.4s;
+  }
+  
+  .wave-bar:nth-child(18) {
+    animation-delay: -0.3s;
+  }
+  
+  .wave-bar:nth-child(19) {
     animation-delay: -0.1s;
   }
   

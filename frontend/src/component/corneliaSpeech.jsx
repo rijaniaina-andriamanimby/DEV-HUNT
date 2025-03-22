@@ -41,7 +41,7 @@ export default function CorneliaSpeech() {
           onClick={toggleRecording}
         >
           <div
-            className="d-flex align-items-center justify-content-center bg-danger rounded-circle"
+            className="d-flex align-items-center justify-content-center bg-primary rounded-circle"
             style={{ width: "200px", height: "200px", zIndex: "100" }}
           >
             <FaMicrophone className="text-white fs-1" />
@@ -56,6 +56,16 @@ export default function CorneliaSpeech() {
             style={{ marginBottom: "-200px" }}
           >
             <div className="wave-container">
+              <div className="wave-bar"></div>
+              <div className="wave-bar"></div>
+              <div className="wave-bar"></div>
+              <div className="wave-bar"></div>
+              <div className="wave-bar"></div>
+              <div className="wave-bar"></div>
+              <div className="wave-bar"></div>
+              <div className="wave-bar"></div>
+              <div className="wave-bar"></div>
+              <div className="wave-bar"></div>
               <div className="wave-bar"></div>
               <div className="wave-bar"></div>
               <div className="wave-bar"></div>
