@@ -20,7 +20,7 @@ app.get('/searchAudio', (req, res) => {
     }
 
     // Recherche dans la base de données (insensible à la casse)
-    const query = 'SELECT * FROM formation WHERE titre LIKE $1';  // Utilisation de LIKE pour une recherche partielle
+    const query = 'SELECT* FROM formation WHERE titre LIKE $1';  // Utilisation de LIKE pour une recherche partielle
     pool.query(query, [`%${title}%`])  // Utilisation de LIKE pour rechercher partiellement
         .then(result => {
             if (result.rows.length > 0) {

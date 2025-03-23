@@ -1,22 +1,71 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Table, Button, Form } from "react-bootstrap";
 import { BsTrash, BsPencil, BsPlusCircle } from "react-icons/bs"; // ✅ Import correct
 import "./css/AdminAudioPage.css";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 export default function AdminAudioPage() {
-  const [audioFiles, setAudioFiles] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [newAudio, setNewAudio] = useState({ name: "", author: "", level: "Débutant", type: "MP3" });
-  const [editAudio, setEditAudio] = useState(null);
+  const [audioFiles, setAudioFiles] = useState([])
+  const [audio, setAudio] = useState("")
+  const [titre, setTitre] = useState("")
+  const [auteur, setAuteur] = useState("")
+  const [niveau, setNiveau] = useState("")
+  const [type, setType] = useState("")
+  const [showModal, setShowModal] = useState(false); // Pour afficher/masquer la modal
+  const [editAudio, setEditAudio] = useState(null); // Pour savoir si un audio est en mode édition
+
+  //get data
+  const handleData = async () =>{
+    try {
+      let response = await axios.get("http://localhost:/"); // Assurez-vous que l'URL est correcte
+      if (Array.isArray(response.data)) {
+        setAudioFiles(response.data);
+      } else {
+        console.error("Les données reçues ne sont pas un tableau :", response.data);
+        setAudioFiles([]); // Évite l'erreur en réinitialisant à un tableau vide
+      }
+    } catch (error) {
+      console.error("Erreur lors de la récupération des fichiers audio :", error);
+      setAudioFiles([]); // En cas d'erreur, évite l'erreur de mapping
+    }
+  }
+  useEffect(()=>{
+    handleData();
+  },[])
 
   // Ajout d'audio
-  const handleAddAudio = () => {
-    if (newAudio.name && newAudio.author) {
-      setAudioFiles([...audioFiles, { ...newAudio, id: Date.now(), file: newAudio.file }]);
-      setNewAudio({ name: "", author: "", level: "Débutant", type: "MP3", file: null });
-      setShowModal(false);
-    }
+  const handleAddAudio = async (e) => {
+    let formData = new FormData();
+    formData.append("audio", audio)
+    formData.append("titre", titre)
+    formData.append("auteur", auteur)
+    formData.append("niveau", niveau)
+    formData.append("type", type)
+
+    await axios ({
+      method: 'post',
+      url:'',
+      data : formData
+    })
+    .then((response) => {
+      console.log(response)
+      Swal.fire({
+        title: "Succés!",
+        text: "Ajout effectuer",
+        icon: "success"
+      });
+    })
+    .catch((err) => {
+      e.preventDefault()
+      console.log(err)
+      Swal.fire({
+        title: "Erreur !",
+        text: "Une erreur est survenue. veuillez réessayer !",
+        icon: "error"
+      });
+    })
   };
 
   // get Modifier audio
@@ -27,15 +76,50 @@ export default function AdminAudioPage() {
   };
 
   // Modifer audio
-  const handleUpdateAudio = () => {
-    setAudioFiles(audioFiles.map(audio => (audio.id === editAudio.id ? newAudio : audio)));
-    setShowModal(false);
-    setEditAudio(null);
-    setNewAudio({ name: "", author: "", level: "Débutant", type: "MP3", file: null });
+  const handleUpdateAudio = async (id) => {
+    let formData = new FormData();
+    formData.append("audio", audio)
+    formData.append("titre", titre)
+    formData.append("auteur", auteur)
+    formData.append("niveau", niveau)
+    formData.append("type", type)
+
+    await axios ({
+      method: 'put',
+      url:'' + id,
+      data : formData
+    })
+    .then((response) => {
+      console.log(response)
+      Swal.fire({
+        title: "Succés!",
+        text: "Modification effectuer",
+        icon: "success"
+      });
+    })
+    .catch((err) => {
+      e.preventDefault()
+      console.log(err)
+      Swal.fire({
+        title: "Erreur !",
+        text: "Une erreur est survenue. veuillez réessayer !",
+        icon: "error"
+      });
+    })
   };
 
   // Suppression audio
-  const handleDeleteAudio = (id) => {
+  const handleDeleteAudio = async (id) => {
+    await axios({
+      method: 'delete',
+      url:'' + id,
+    })
+    .then(()=>{
+      console.log("supprimer")
+    })
+    .catch((err)=>{
+      console.log(err.message)
+    })
     setAudioFiles(audioFiles.filter((audio) => audio.id !== id));
   };
 
@@ -100,25 +184,16 @@ export default function AdminAudioPage() {
               <Form.Control
                 type="text"
                 placeholder="Entrez le nom du fichier audio"
-                value={newAudio.name}
-                onChange={(e) => setNewAudio({ ...newAudio, name: e.target.value })}
-              />
-            </Form.Group>
-            <Form.Group className="mt-3">
-              <Form.Label>Auteur</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Entrez le nom de l'auteur"
-                value={newAudio.author}
-                onChange={(e) => setNewAudio({ ...newAudio, author: e.target.value })}
+                value={titre}
+                onChange={(e) => setTitre( e.target.value )}
               />
             </Form.Group>
             <Form.Group className="mt-3">
               <Form.Label>Niveau</Form.Label>
               <Form.Control
                 as="select"
-                value={newAudio.level}
-                onChange={(e) => setNewAudio({ ...newAudio, level: e.target.value })}
+                value={niveau}
+                onChange={(e) => setNiveau(e.target.value)}
               >
                 <option value="Débutant">Débutant</option>
                 <option value="Intermédiaire">Intermédiaire</option>
@@ -128,13 +203,18 @@ export default function AdminAudioPage() {
             <Form.Group className="mt-3">
               <Form.Label>Type de Fichier</Form.Label>
               <Form.Control
-                as="select"
-                value={newAudio.type}
-                onChange={(e) => setNewAudio({ ...newAudio, type: e.target.value })}
+                as="text"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
               >
-                <option value="MP3">MP3</option>
-                <option value="WAV">WAV</option>
-                <option value="OGG">OGG</option>
+              </Form.Control></Form.Group>
+            <Form.Group className="mt-3">
+              <Form.Label>Auteur</Form.Label>
+              <Form.Control
+                as="text"
+                value={auteur}
+                onChange={(e) => setAuteur(e.target.value)}
+              >
               </Form.Control>
             </Form.Group>
             <Form.Group className="mt-3">
@@ -142,7 +222,7 @@ export default function AdminAudioPage() {
               <Form.Control
                 type="file"
                 accept="audio/*"
-                onChange={(e) => setNewAudio({ ...newAudio, file: e.target.files[0] })}
+                onChange={(e) => setAudio(e.target.files[0])}
               />
             </Form.Group>
           </Form>
