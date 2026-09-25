@@ -1,4 +1,3 @@
-[1] Cloner avant de commencer
-[2] Creer une branche 
-[3] Coder 
-*************+++++++++++++++************
+## 🎙️ Application de transcription audio
+
+Développée lors d’un **Hackathon organisé au sein de l’ENI**, cette application web a pour objectif de **transcrire automatiquement des fichiers audio en texte** grâce à des technologies d’intelligence artificielle. Le projet repose sur une architecture moderne combinant **FastAPI** et **PyTorch** pour le traitement et la transcription des données audio côté backend, ainsi que **ReactJS** pour offrir une interface utilisateur fluide, intuitive et interactive. Ce projet nous a permis de mettre en pratique nos compétences en **développement web, intelligence artificielle et traitement de données audio**, dans le cadre d’un développement réalisé en équipe et dans un temps limité.

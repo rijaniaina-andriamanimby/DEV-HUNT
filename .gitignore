@@ -2,3 +2,7 @@ node_modules/
 backend/node_modules/
 frontend/node_modules/
 .vscode
+__pycache__/
+.idea/
+.env/
+start_server.bat
